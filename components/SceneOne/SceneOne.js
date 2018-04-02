@@ -11,7 +11,12 @@ export default class SceneOne extends PureComponent {
   }
 
   state = {
+    render: false,
     counter: 0,
+  }
+
+  componentDidMount() {
+    this.setState({ render: true })
   }
 
   updateCounter = (delay) => {
@@ -21,28 +26,30 @@ export default class SceneOne extends PureComponent {
   }
 
   render() {
-    const { counter } = this.state
+    const { render, counter } = this.state
 
     return (
       <div className="container">
-        <div className="text-container">
-          {counter === 0 &&
-            <Text
-              text="You wake up in the middle of the night, lights out. The moon lights the place through the window."
-              fade={3000}
-              writeSpeed={70}
-              updateCounter={this.updateCounter}
-            />
-          }
-          {counter === 1 &&
-            <Text
-              text="You realize. This is not your room..."
-              fade={10000}
-              writeSpeed={150}
-              updateCounter={this.updateCounter}
-            />
-          }
-        </div>
+        {render &&
+          <div className="text-container">
+            {counter === 0 &&
+              <Text
+                text="You wake up in the middle of the night, lights out. The moon lights the place through the window."
+                fade={3000}
+                writeSpeed={70}
+                updateCounter={this.updateCounter}
+              />
+            }
+            {counter === 1 &&
+              <Text
+                text="You realize. This is not your room..."
+                fade={10000}
+                writeSpeed={150}
+                updateCounter={this.updateCounter}
+              />
+            }
+          </div>
+        }
 
         <style jsx>{`
 
